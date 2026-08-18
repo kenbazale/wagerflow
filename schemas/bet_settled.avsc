@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "BetSettled",
+  "namespace": "com.wagerflow.events",
+  "doc": "Emitted by the Settlement Service once a bet's outcome is resolved against a declared game result. The saga's terminal event for a bet's happy path.",
+  "fields": [
+    {"name": "bet_id", "type": "string"},
+    {"name": "player_id", "type": "string"},
+    {"name": "market_id", "type": "string"},
+    {"name": "outcome", "type": {"type": "enum", "name": "SettlementOutcome", "symbols": ["WON", "LOST", "VOID"]}},
+    {"name": "payout_amount", "type": "double", "doc": "0.0 for LOST; stake returned for VOID; stake * odds for WON"},
+    {"name": "settled_at", "type": "long", "logicalType": "timestamp-millis"}
+  ]
+}

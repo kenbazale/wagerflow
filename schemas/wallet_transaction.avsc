@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "WalletTransaction",
+  "namespace": "com.wagerflow.events",
+  "doc": "A single movement of funds in a player's wallet. This IS the ledger — the wallet's current balance is always derived by folding over these events (event sourcing), never stored as a mutable column anywhere.",
+  "fields": [
+    {"name": "transaction_id", "type": "string"},
+    {"name": "player_id", "type": "string"},
+    {"name": "direction", "type": {"type": "enum", "name": "TransactionDirection", "symbols": ["DEBIT", "CREDIT"]}},
+    {"name": "amount", "type": "double", "doc": "Always positive; direction determines whether it decreases or increases balance"},
+    {"name": "reference_type", "type": {"type": "enum", "name": "ReferenceType", "symbols": ["BET_STAKE", "BET_PAYOUT", "BET_VOID_REFUND", "DEPOSIT", "WITHDRAWAL"]}},
+    {"name": "reference_id", "type": "string", "doc": "The bet_id, deposit_id, or withdrawal_id this transaction relates to"},
+    {"name": "occurred_at", "type": "long", "logicalType": "timestamp-millis"}
+  ]
+}

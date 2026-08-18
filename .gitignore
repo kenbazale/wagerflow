@@ -1,0 +1,16 @@
+.env
+infra/certs/*.jks
+infra/certs/*.key
+infra/certs/*.crt
+infra/certs/*.csr
+infra/certs/*.srl
+infra/certs/cert_creds
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+dbt_project/target/
+dbt_project/logs/
+dbt_project/dbt_packages/
+.DS_Store

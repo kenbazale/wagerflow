@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "RGAlert",
+  "namespace": "com.wagerflow.events",
+  "doc": "Emitted by the RG Monitoring service when a player's behavior trips a responsible-gambling rule. Consumed by compliance tooling / player-intervention services in a real system.",
+  "fields": [
+    {"name": "alert_id", "type": "string"},
+    {"name": "player_id", "type": "string"},
+    {"name": "rule_triggered", "type": {"type": "enum", "name": "RGRule", "symbols": ["DEPOSIT_VELOCITY", "LOSS_CHASING", "SESSION_LENGTH"]}},
+    {"name": "severity", "type": {"type": "enum", "name": "RGSeverity", "symbols": ["LOW", "MEDIUM", "HIGH"]}},
+    {"name": "details", "type": "string", "doc": "Human-readable explanation of what triggered the alert, e.g. '4 deposits in 8 minutes'"},
+    {"name": "triggered_at", "type": "long", "logicalType": "timestamp-millis"}
+  ]
+}

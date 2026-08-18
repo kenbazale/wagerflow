@@ -1,0 +1,12 @@
+{
+    "type": "record",
+    "name": "BetRejected",
+    "namespace": "com.wagerflow.events",
+    "doc": "Emitted by the Bet Service when a bet command fails validation before any wallet impact — no transaction ever occurs for a rejected bet.",
+    "fields": [
+        {"name": "command_id", "type": "string"},
+        {"name": "player_id", "type": "string"},
+        {"name": "reason", "type": {"type": "enum", "name": "RejectionReason", "symbols": ["SELF_EXCLUDED", "INSUFFICIENT_BALANCE", "UNKNOWN_PLAYER"]}},
+        {"name": "rejected_at", "type": "long", "logicalType": "timestamp-millis"}
+        ]
+}

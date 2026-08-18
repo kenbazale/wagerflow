@@ -1,0 +1,16 @@
+{
+    "type": "record",
+    "name": "BetPlaced",
+    "namespace": "com.wagerflow.events",
+    "docs": "Emitted by the Bet Service when a player places a bet, before any wallet debit has occurred.",
+    "fields":[
+        {"name": "bet_id", "type": "string"},
+        {"name": "player_id", "type": "string"},
+        {"name": "market_id", "type": "string", "doc": "The market/event being bet on, e.g. a specific match"},
+        {"name": "selection", "type": "string", "doc": "What the player is backing, e.g. 'Team A to win'"},
+        {"name": "stake", "type": "double"},
+        {"name": "odds", "type": "double", "doc": "Decimal odds, e.g. 2.5 means a 100 stake returns 250 total on a win"},
+        {"name": "potential_payout", "type": "double"},
+        {"name": "placed_at", "type": "long", "logicalType": "timestamp-millis"}
+    ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "GameResultDeclared",
+  "namespace": "com.wagerflow.events",
+  "doc": "Emitted by the Game Engine when a market's outcome is finalized. Triggers the Settlement Service to resolve all bets placed on this market.",
+  "fields": [
+    {"name": "game_id", "type": "string"},
+    {"name": "market_id", "type": "string"},
+    {"name": "outcome", "type": "string", "doc": "The winning selection string, matching what a winning BetPlaced.selection would equal. 'VOID' means the market is cancelled (e.g. match abandoned) and all bets on it should be refunded, not settled."},
+    {"name": "declared_at", "type": "long", "logicalType": "timestamp-millis"}
+  ]
+}
