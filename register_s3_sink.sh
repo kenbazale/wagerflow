@@ -26,7 +26,8 @@ curl -X POST -H "Content-Type: application/json" \
       "timezone": "UTC",
       "key.converter": "org.apache.kafka.connect.storage.StringConverter",
       "value.converter": "io.confluent.connect.avro.AvroConverter",
-      "value.converter.schema.registry.url": "http://schema-registry:8081"
+      "value.converter.schema.registry.url": "http://schema-registry:8081",
+      "rotate.schedule.interval.ms": "60000"
     }
   }' \
   $CONNECT_URL/connectors

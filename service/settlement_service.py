@@ -35,6 +35,7 @@ from avro_utils import make_serializer, make_deserializer, produce_avro
 # market_id -> list of open bet dicts (bet_id, player_id, selection, stake, potential_payout)
 open_bets = defaultdict(list)
 cache_lock = threading.Lock()
+cache_ready = threading.Event()
 
 bet_placed_deserializer = make_deserializer('bet_placed.avsc')
 game_result_deserializer = make_deserializer('game_result_declared.avsc')
@@ -49,22 +50,37 @@ def now_ms():
 def bet_cache_worker():
     consumer = Consumer({
         'bootstrap.servers': 'localhost:9092',
-        'group.id': 'settlement-service-bet-cache',
+        'group.id': f"settlement-service-bet-cache-{uuid.uuid4().hex}",
         'auto.offset.reset': 'earliest',
-        'enable.auto.commit': True,
+        'enable.auto.commit': False,
     })
     consumer.subscribe(['bet-placed-events'])
+    startup_end_offsets = None
     while True:
         msg = consumer.poll(1.0)
-        if msg is None or msg.error():
+        assignments = consumer.assignment()
+        if not assignments:
             continue
-        try:
-            bet = bet_placed_deserializer(msg.value(), SerializationContext(msg.topic(), MessageField.VALUE))
-            with cache_lock:
-                open_bets[bet['market_id']].append(bet)
-        except Exception as e:
-            print(f"[BET-CACHE] skip malformed message: {e}")
+        if startup_end_offsets is None:
+            startup_end_offsets = {
+                partition: consumer.get_watermark_offsets(partition, cached=False)[1]
+                for partition in assignments
+            }
+        if msg is not None and not msg.error():
+            try:
+                bet = bet_placed_deserializer(msg.value(), SerializationContext(msg.topic(), MessageField.VALUE))
+                with cache_lock:
+                    open_bets[bet['market_id']].append(bet)
+            except Exception as e:
+                print(f"[BET-CACHE] skip malformed message: {e}")
+            consumer.commit(msg, asynchronous=False)
 
+        positions = consumer.position(assignments)
+        if all(
+            position.offset >= startup_end_offsets[partition]
+            for partition, position in zip(assignments, positions)
+        ):
+            cache_ready.set()
 
 def publish_wallet_credit(player_id, amount, reference_type, reference_id):
     credit = {
@@ -167,9 +183,10 @@ def game_result_worker():
 
 if __name__ == '__main__':
     threading.Thread(target=bet_cache_worker, daemon=True).start()
-    print("Settlement Service running... (warming bet cache for a few seconds)")
-    import time
-    time.sleep(5)
+    print("Settlement Service running... (warming bet cache)")
+    if not cache_ready.wait(timeout=30):
+        raise RuntimeError("Timed out waiting for bet cache to catch up")
+    print("[BET-CACHE] startup catch-up complete")
     try:
         game_result_worker()
     except KeyboardInterrupt:
