@@ -41,6 +41,17 @@ PG_USER = "wagerflow"
 PG_PASSWORD = "wagerflow_dev_pw"  # override via --pg-password if changed
 PG_JDBC_URL = f"jdbc:postgresql://{PG_HOST}:{PG_PORT}/{PG_DB}"
 PG_SCHEMA = "analytics"
+RS_ADMIN_USER = "wf_admin"
+RS_ADMIN_PASSWORD = os.environ.get("RS_ADMIN_PASSWORD", "")
+
+# --- Redshift Serveless (Phase 7.5) --
+RS_HOST = "wagerflow-wg.821667315166.us-east-1.redshift-serverless.amazonaws.com"
+RS_PORT = 5439
+RS_DB = "wagerflow"
+RS_JDBC_URL = f"jdbc:redshift://{RS_HOST}:{RS_PORT}/{RS_DB}"
+RS_SCHEMA = "analytics"
+RS_IAM_ROLE_ARN = "arn:aws:iam::821667315166:role/wagerflow-redshift-s3-role"
+RS_TEMPDIR = f"s3a://{S3_BUCKET}/redshift-tmp/"
 
 
 def build_spark_session() -> SparkSession:
@@ -59,6 +70,11 @@ def build_spark_session() -> SparkSession:
                     "org.apache.hadoop:hadoop-aws:3.5.0",
                     "org.apache.spark:spark-avro_2.13:4.2.0",
                     "org.postgresql:postgresql:42.7.4",
+                    "org.apache.hadoop:hadoop-aws:3.5.0",
+                    "org.apache.spark:spark-avro_2.13:4.2.0",
+                    "org.postgresql:postgresql:42.7.4",
+                    "io.github.spark-redshift-community:spark-redshift_2.13:6.6.0-spark_4.0",
+                    "com.amazon.redshift:redshift-jdbc42:2.1.0.32",
                 ]
             ),
         )
@@ -149,6 +165,19 @@ def write_to_postgres(df, table_name: str, pg_password: str):
         .save()
     )
 
+def write_to_redshift(df, table_name: str):
+    (
+        df.write.format("io.github.spark_redshift_community.spark.redshift")
+        .option("url", RS_JDBC_URL)
+        .option("user", RS_ADMIN_USER)
+        .option("password", RS_ADMIN_PASSWORD)
+        .option("dbtable", f"{RS_SCHEMA}.{table_name}")
+        .option("tempdir", RS_TEMPDIR)
+        .option("aws_iam_role", RS_IAM_ROLE_ARN)
+        .mode("overwrite")
+        .save()
+    )
+
 
 def main():
     pg_password = PG_PASSWORD
@@ -181,7 +210,11 @@ def main():
         write_to_postgres(ggr_daily, "ggr_daily", pg_password)
         write_to_postgres(player_ltv, "player_ltv", pg_password)
 
-        print(f"\nWrote {PG_SCHEMA}.ggr_daily and {PG_SCHEMA}.player_ltv to Postgres.")
+        write_to_redshift(ggr_daily, "ggr_daily")
+        write_to_redshift(player_ltv, "player_ltv")
+        
+        print(f"\nWrote {PG_SCHEMA}.ggr_daily/{PG_SCHEMA}.player_ltv to Postgres, "
+            f"and {RS_SCHEMA}.ggr_daily/{RS_SCHEMA}.player_ltv to Redshift.")
 
     finally:
         spark.stop()
