@@ -29,7 +29,7 @@ from confluent_kafka import Producer, Consumer
 from confluent_kafka.serialization import SerializationContext, MessageField
 
 from avro_utils import make_serializer, make_deserializer, produce_avro, produce_transactional
-from cache_bootstrap import seed_default_caches
+from tests.test_seed_default_caches_populates_players_only import seed_default_caches
 from event_topics import get_event_topic
 
 # ---- Local caches, kept warm by background consumer threads ----

@@ -1,0 +1,135 @@
+[0m16:17:11.048287 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f46987d40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f45a6b650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f45092f00>]}
+
+
+============================== 16:17:11.056715 | 60361e7b-84a5-4dbb-af0c-83676c24915c ==============================
+[0m16:17:11.056715 [info ] [MainThread]: Running with dbt=1.12.3
+[0m16:17:11.057429 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'cache_selected_only': 'False', 'version_check': 'True', 'partial_parse': 'True', 'quiet': 'False', 'profiles_dir': '/home/bazale/.dbt', 'target_path': 'None', 'hints_enabled': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'maximum_seed_size_mib': '1', 'log_path': 'logs', 'fail_fast': 'False', 'introspect': 'True', 'static_parser': 'True', 'no_print': 'None', 'use_colors': 'True', 'empty': 'None', 'write_json': 'True', 'send_anonymous_usage_stats': 'True', 'warn_error': 'None', 'use_experimental_parser': 'False', 'log_format': 'default', 'invocation_command': 'dbt init wagerflow_dbt', 'indirect_selection': 'eager', 'debug': 'False', 'log_cache_events': 'False'}
+[0m16:17:11.098406 [debug] [MainThread]: Starter project path: /home/bazale/kafka-mentor/venv/lib/python3.12/site-packages/dbt/include/starter_project
+[0m16:17:11.127477 [info ] [MainThread]: Setting up your profile.
+[0m16:17:17.928735 [debug] [MainThread]: Redshift adapter: Setting redshift_connector to ERROR
+[0m16:17:17.929336 [debug] [MainThread]: Redshift adapter: Setting redshift_connector.core to ERROR
+[0m16:20:19.059443 [info ] [MainThread]: Profile wagerflow_dbt written to /home/bazale/.dbt/profiles.yml using target's profile_template.yml and your supplied values.
+[0m16:20:19.068935 [info ] [MainThread]: Running dbt debug to validate the project...
+[0m16:20:19.070618 [info ] [MainThread]: dbt version: 1.12.3
+[0m16:20:19.072007 [info ] [MainThread]: python version: 3.12.3
+[0m16:20:19.074305 [info ] [MainThread]: python path: /home/bazale/kafka-mentor/venv/bin/python3
+[0m16:20:19.076008 [info ] [MainThread]: os info: Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39
+[0m16:20:19.233251 [info ] [MainThread]: Using profiles dir at /home/bazale/.dbt
+[0m16:20:19.233903 [info ] [MainThread]: Using profiles.yml file at /home/bazale/.dbt/profiles.yml
+[0m16:20:19.234335 [info ] [MainThread]: Using dbt_project.yml file at /home/bazale/wagerflow/wagerflow_dbt/dbt_project.yml
+[0m16:20:19.364677 [info ] [MainThread]: adapter type: redshift
+[0m16:20:19.368750 [info ] [MainThread]: adapter version: 1.11.1
+[0m16:20:19.724046 [info ] [MainThread]: Configuration:
+[0m16:20:19.724822 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m16:20:19.725534 [info ] [MainThread]:   dbt_project.yml file [[32mOK found and valid[0m]
+[0m16:20:19.726254 [info ] [MainThread]: Required dependencies:
+[0m16:20:19.727021 [debug] [MainThread]: Executing "git --help"
+[0m16:20:19.950103 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m16:20:19.951444 [debug] [MainThread]: STDERR: "b''"
+[0m16:20:19.952582 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m16:20:19.953918 [info ] [MainThread]: Connection:
+[0m16:20:19.955368 [info ] [MainThread]:   host: wagerflow-wg.821667315166.us-east-1.redshift-serverless.amazonaws.com
+[0m16:20:19.956944 [info ] [MainThread]:   user: wf_admin
+[0m16:20:19.958201 [info ] [MainThread]:   port: 5439
+[0m16:20:19.959252 [info ] [MainThread]:   database: wagerflow
+[0m16:20:19.964814 [info ] [MainThread]:   method: database
+[0m16:20:19.966635 [info ] [MainThread]:   cluster_id: None
+[0m16:20:19.967394 [info ] [MainThread]:   iam_profile: None
+[0m16:20:19.968529 [info ] [MainThread]:   schema: dbt_dev
+[0m16:20:19.969441 [info ] [MainThread]:   sslmode: prefer
+[0m16:20:19.970136 [info ] [MainThread]:   region: None
+[0m16:20:19.970872 [info ] [MainThread]:   sslmode: prefer
+[0m16:20:19.971471 [info ] [MainThread]:   region: None
+[0m16:20:19.971994 [info ] [MainThread]:   autocreate: False
+[0m16:20:19.972499 [info ] [MainThread]:   db_groups: []
+[0m16:20:19.973045 [info ] [MainThread]:   ra3_node: False
+[0m16:20:19.973641 [info ] [MainThread]:   datasharing: False
+[0m16:20:19.974170 [info ] [MainThread]:   connect_timeout: None
+[0m16:20:19.974803 [info ] [MainThread]:   role: None
+[0m16:20:19.975296 [info ] [MainThread]:   retries: 1
+[0m16:20:19.975775 [info ] [MainThread]:   retry_all: False
+[0m16:20:19.976217 [info ] [MainThread]:   autocommit: True
+[0m16:20:19.976653 [info ] [MainThread]:   access_key_id: None
+[0m16:20:19.983056 [info ] [MainThread]:   is_serverless: None
+[0m16:20:19.985602 [info ] [MainThread]:   serverless_work_group: None
+[0m16:20:19.987297 [info ] [MainThread]:   serverless_acct_id: None
+[0m16:20:19.988540 [info ] [MainThread]:   tcp_keepalive: True
+[0m16:20:19.989463 [info ] [MainThread]:   tcp_keepalive_idle: None
+[0m16:20:19.990098 [info ] [MainThread]:   tcp_keepalive_interval: None
+[0m16:20:19.990829 [info ] [MainThread]:   tcp_keepalive_count: None
+[0m16:20:19.991410 [info ] [MainThread]:   query_group: none
+[0m16:20:19.992008 [info ] [MainThread]:   allow_concurrent_drops: False
+[0m16:20:19.992876 [info ] [MainThread]:   drop_without_cascade: False
+[0m16:20:19.995846 [info ] [MainThread]: Registered adapter: redshift=1.11.1
+[0m16:20:20.161119 [debug] [MainThread]: Acquiring new redshift connection 'debug'
+[0m16:20:20.171935 [debug] [MainThread]: Using redshift connection "debug"
+[0m16:20:20.172677 [debug] [MainThread]: On debug: select 1 as id
+[0m16:20:20.173168 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m16:20:20.173689 [debug] [MainThread]: Redshift adapter: Connecting to Redshift with 'database' credentials method
+[0m16:20:20.180771 [debug] [MainThread]: Redshift adapter: Establishing connection using ssl with `sslmode` set to 'prefer'.To connect without ssl, set `sslmode` to 'disable'.
+[0m16:20:52.932610 [debug] [MainThread]: Redshift adapter: Got a retryable error when attempting to open a redshift connection.
+1 attempts remaining. Retrying in 1 seconds.
+Error:
+{'S': 'FATAL', 'C': '28000', 'M': 'password authentication failed for user "wf_admin"', 'F': '/opt/brazil-pkg-cache/packages/RedshiftPADB/RedshiftPADB-1.0.300034.0/AL2_aarch64/generic-flavor/src/src/pg/src/backend/libpq/auth.c', 'L': '650', 'R': 'auth_failed'}
+[0m16:20:56.159901 [debug] [MainThread]: Redshift adapter: Error running SQL: select 1 as id
+[0m16:20:56.161200 [debug] [MainThread]: Redshift adapter: Rolling back transaction.
+[0m16:20:56.162567 [debug] [MainThread]: Redshift adapter: Not retrying error: Database Error
+  {'S': 'FATAL', 'C': '28000', 'M': 'password authentication failed for user "wf_admin"', 'F': '/opt/brazil-pkg-cache/packages/RedshiftPADB/RedshiftPADB-1.0.300034.0/AL2_aarch64/generic-flavor/src/src/pg/src/backend/libpq/auth.c', 'L': '650', 'R': 'auth_failed'}
+[0m16:20:56.163750 [debug] [MainThread]: On debug: No close available on handle
+[0m16:20:56.164810 [info ] [MainThread]:   Connection test: [[31mERROR[0m]
+
+[0m16:20:56.167792 [info ] [MainThread]: [31m1 check failed:[0m
+[0m16:20:56.170559 [info ] [MainThread]: dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  {'S': 'FATAL', 'C': '28000', 'M': 'password authentication failed for user "wf_admin"', 'F': '/opt/brazil-pkg-cache/packages/RedshiftPADB/RedshiftPADB-1.0.300034.0/AL2_aarch64/generic-flavor/src/src/pg/src/backend/libpq/auth.c', 'L': '650', 'R': 'auth_failed'}
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m16:20:56.173840 [info ] [MainThread]: Your new dbt project "wagerflow_dbt" was created!
+Initialized new project in /home/bazale/wagerflow/wagerflow_dbt/wagerflow_dbt
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m16:20:56.175645 [info ] [MainThread]: [31mYour profile may need adjustments. You can find the logs of `dbt debug` above[0m
+[0m16:20:56.503706 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 232.47696, "process_in_blocks": "143000", "process_kernel_time": 0.86344, "process_mem_max_rss": "133936", "process_out_blocks": "104", "process_user_time": 4.026772}
+[0m16:20:56.506351 [debug] [MainThread]: Command `dbt init` succeeded at 16:20:56.505702 after 232.48 seconds
+[0m16:20:56.508775 [debug] [MainThread]: Connection 'debug' was properly closed.
+[0m16:20:56.511849 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f4458a630>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f44eeaf00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7d4f4437c290>]}
+[0m16:20:56.515166 [debug] [MainThread]: Flushing usage events
+[0m16:20:59.056645 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m16:21:37.751061 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b5473a3e60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b5467bf830>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b547a2e360>]}
+
+
+============================== 16:21:37.761181 | a8d7243a-8a37-463e-8a6d-2a381d0f6330 ==============================
+[0m16:21:37.761181 [info ] [MainThread]: Running with dbt=1.12.3
+[0m16:21:37.762304 [debug] [MainThread]: running dbt with arguments {'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'introspect': 'True', 'profiles_dir': '/home/bazale/.dbt', 'invocation_command': 'dbt init wagerflow_dbt', 'use_experimental_parser': 'False', 'fail_fast': 'False', 'warn_error': 'None', 'empty': 'None', 'write_json': 'True', 'target_path': 'None', 'log_format': 'default', 'cache_selected_only': 'False', 'debug': 'False', 'version_check': 'True', 'log_cache_events': 'False', 'use_colors': 'True', 'no_print': 'None', 'printer_width': '80', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'partial_parse': 'True', 'static_parser': 'True', 'hints_enabled': 'True', 'log_path': 'logs', 'maximum_seed_size_mib': '1'}
+[0m16:21:37.798966 [info ] [MainThread]: A project called wagerflow_dbt already exists here.
+[0m16:21:37.800417 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": true, "command_wall_clock_time": 0.21962395, "process_in_blocks": "66496", "process_kernel_time": 0.478081, "process_mem_max_rss": "108788", "process_out_blocks": "16", "process_user_time": 3.203144}
+[0m16:21:37.801479 [debug] [MainThread]: Command `dbt init` succeeded at 16:21:37.801147 after 0.22 seconds
+[0m16:21:37.802093 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b54adb3350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b5477c12e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x74b546514a10>]}
+[0m16:21:37.802758 [debug] [MainThread]: Flushing usage events
+[0m16:21:40.029450 [debug] [MainThread]: An error was encountered while trying to flush usage events
+{"data":{"log_version":3,"version":"=2.0.0-preview.205"},"info":{"category":"","code":"A001","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"info","msg":"Running with dbt-fusion=2.0.0-preview.205","name":"MainReportVersion","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:44.023753Z"}}
+{"data":{"args":{"debug":"false","invocation_command":"C:\\Users\\cbm\\.local\\bin\\dbt.exe license info --json --log-format json","log_format":"json","quiet":"false","write_json":"true"}},"info":{"category":"","code":"A002","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"debug","msg":"running dbt-fusion with arguments {\"command\":\"license\",\"vars\":\"{}\",\"limit\":\"10\",\"debug\":false,\"log_format\":\"json\",\"quiet\":false,\"write_json\":true,\"write_catalog\":false,\"manage_state\":false}","name":"MainReportArgs","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:44.024922Z"}}
+{"data":{},"info":{"category":"","code":"","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"debug","msg":"No platform credentials found, skipping remote license","name":"Generic","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:44.169359Z"}}
+{"data":{},"info":{"category":"","code":"","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"debug","msg":"Requesting trial license from https://cloud.getdbt.com/api/private/trial-licenses/","name":"Generic","pid":23160,"thread":"main","ts":"2026-08-22T14:11:52.775963Z"}}
+{"data":{},"info":{"category":"","code":"","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"debug","msg":"Trial license retrieved","name":"Generic","pid":23160,"thread":"main","ts":"2026-08-22T14:11:54.098176Z"}}
+{"data":{},"info":{"category":"","code":"","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"debug","msg":"Trial license from trial license server is expired","name":"Generic","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:54.117287Z"}}
+{"data":{"columns":[],"is_inline":true,"node_name":"license_info","output_format":"json","preview":"{\n  \"status\": \"trial_expired\",\n  \"licensing_enabled\": true,\n  \"expires_at\": \"2026-05-05T19:13:13+00:00\",\n  \"license_type\": \"trial\"\n}","unique_id":"license.info"},"info":{"category":"","code":"Q041","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"info","msg":"{\n  \"status\": \"trial_expired\",\n  \"licensing_enabled\": true,\n  \"expires_at\": \"2026-05-05T19:13:13+00:00\",\n  \"license_type\": \"trial\"\n}","name":"ShowNode","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:54.147601Z"}}
+{"data":{"completed_at":"2026-08-22T14:11:54.510669Z","elapsed":10.492056846618652,"success":true},"info":{"category":"","code":"Q039","extra":{},"invocation_id":"01a029d0-2c29-7be1-9c48-c850fed5d169","level":"info","msg":"\n==================== Execution Summary =====================\nFinished 'license' successfully [10.5s]","name":"CommandCompleted","pid":23160,"thread":"tokio-rt-worker","ts":"2026-08-22T14:11:54.526241Z"}}

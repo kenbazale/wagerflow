@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: ggr_daily
+    description: "Mart: daily GGR by market. Pass-through of stg_ggr_daily."
+    columns:
+      - name: settlement_date
+        tests:
+          - not_null
+      - name: market_id
+        tests:
+          - not_null
+      - name: ggr
+        tests:
+          - not_null
+      - name: bet_count
+        tests:
+          - not_null
+
+  - name: player_ltv
+    description: "Mart: all-time lifetime value per player. Pass-through of stg_player_ltv."
+    columns:
+      - name: player_id
+        tests:
+          - unique
+          - not_null
+      - name: ltv
+        tests:
+          - not_null
+      - name: bet_count
+        tests:
+          - not_null

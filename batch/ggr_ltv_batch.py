@@ -174,7 +174,8 @@ def write_to_redshift(df, table_name: str):
         .option("dbtable", f"{RS_SCHEMA}.{table_name}")
         .option("tempdir", RS_TEMPDIR)
         .option("aws_iam_role", RS_IAM_ROLE_ARN)
-        .mode("overwrite")
+        .option("preactions", f"TRUNCATE TABLE {RS_SCHEMA}.{table_name};")
+        .mode("append")
         .save()
     )
 

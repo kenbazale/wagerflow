@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: analytics
+    description: "Tables written by the pyspark nightly GGR/LTV batch job"
+    schema: analytics
+    tables:
+      - name: ggr_daily
+        description: "Daily gross gaming revenue by market, computed as stake - payout_amount"
+        columns:
+          - name: settlement_date
+            description: "Date the bets in this row were settled"
+          - name: market_id
+          - name: total_stake
+          - name: total_payout
+          - name: ggr
+          - name: bet_count
+          
+      - name: player_ltv
+        description: "All-time lifetime value per player, computed as stake - payout_amount"
+        columns:
+          - name: player_id
+          - name: total_stake
+          - name: total_payout
+          - name: ltv
+          - name: bet_count

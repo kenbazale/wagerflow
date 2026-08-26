@@ -10,7 +10,14 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
-dbt_project/target/
-dbt_project/logs/
-dbt_project/dbt_packages/
+
+# Airflow runtime output and local credentials
+airflow/logs/
+airflow/keys/
+airflow/config/airflow.cfg
+
+# dbt generated output
+wagerflow_dbt/target/
+wagerflow_dbt/logs/
+wagerflow_dbt/dbt_packages/
 .DS_Store
