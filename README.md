@@ -14,6 +14,8 @@ A player places a bet → the bet is validated against their wallet balance and 
 
 ## Architecture at a glance
 
+![WagerFlow architecture diagram](./.docs/wagerflow_architecture_diagram.svg)
+
 ```
 Bet Command → Bet Service → Kafka (BetPlaced/BetRejected, Avro)
                                 │
