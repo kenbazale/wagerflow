@@ -1,0 +1,5 @@
+confluent_kafka[avro,schema-registry]==2.15.0
+faust_streaming==0.11.3
+psycopg2_binary==2.9.12
+pyspark==4.2.0
+pytest==9.1.1

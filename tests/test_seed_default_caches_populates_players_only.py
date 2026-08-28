@@ -18,7 +18,7 @@ def seed_default_caches(player_cache, balance_cache):
         # balance_cache intentionally left unset here — populated only by
         # wallet_cache_worker consuming real wallet-events
         
-def test_seed_default_caches_populates_players_and_balances():
+def test_seed_default_caches_populates_players_only():
     player_cache = {}
     balance_cache = {}
 

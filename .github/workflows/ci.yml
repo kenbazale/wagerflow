@@ -1,0 +1,36 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request: 
+        branches: [main]
+
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@v4
+
+            - name: Set up python
+              uses: actions/setup-python@v5
+              with:
+                python-version: "3.12"
+                cache: "pip"
+
+            # PySpark needs a JVM at runtime — the ggr_ltv_batch tests will fail
+            # without this even though `pip install pyspark` succeeds fine on its own.
+            - name: Set up Jav (required by pySpark)
+              uses: actions/setup-java@v4
+              with:
+                distribution: "temurin"
+                java-version: "17"
+            
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+
+            - name: Run tests
+              run: pytest tests/ -v

@@ -1,6 +1,6 @@
-from pyspark.sql import Row
 from datetime import datetime
 from pyspark.sql import Row
+
 from batch.ggr_ltv_batch import build_settled_bets, build_ggr_daily, build_player_ltv
 
 
@@ -18,13 +18,14 @@ def _settlement(spark, rows):
         schema="bet_id string, outcome string, payout_amount double, settled_at_ts timestamp",
     )
 
+
 def test_settled_bets_excludes_unsettled_bets(spark):
     bet_placed = _bet_placed(spark, [
         Row(bet_id="b1", player_id="p1", market_id="m1", stake=10.0),
         Row(bet_id="b2", player_id="p1", market_id="m1", stake=20.0),  # never settles
     ])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="WON", payout_amount=15.0, settled_at_ts="2026-08-20 10:00:00"),
+        Row(bet_id="b1", outcome="WON", payout_amount=15.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
@@ -36,7 +37,7 @@ def test_settled_bets_excludes_unsettled_bets(spark):
 def test_ggr_formula_won_is_stake_minus_payout(spark):
     bet_placed = _bet_placed(spark, [Row(bet_id="b1", player_id="p1", market_id="m1", stake=10.0)])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="WON", payout_amount=25.0, settled_at_ts="2026-08-20 10:00:00"),
+        Row(bet_id="b1", outcome="WON", payout_amount=25.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
@@ -48,7 +49,7 @@ def test_ggr_formula_won_is_stake_minus_payout(spark):
 def test_ggr_formula_lost_keeps_full_stake(spark):
     bet_placed = _bet_placed(spark, [Row(bet_id="b1", player_id="p1", market_id="m1", stake=10.0)])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-20 10:00:00"),
+        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
@@ -60,7 +61,7 @@ def test_ggr_formula_lost_keeps_full_stake(spark):
 def test_ggr_formula_void_nets_to_zero(spark):
     bet_placed = _bet_placed(spark, [Row(bet_id="b1", player_id="p1", market_id="m1", stake=10.0)])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="VOID", payout_amount=10.0, settled_at_ts="2026-08-20 10:00:00"),
+        Row(bet_id="b1", outcome="VOID", payout_amount=10.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
@@ -76,9 +77,9 @@ def test_ggr_daily_groups_by_date_and_market(spark):
         Row(bet_id="b3", player_id="p1", market_id="m2", stake=30.0),
     ])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-20 10:00:00"),
-        Row(bet_id="b2", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-20 11:00:00"),
-        Row(bet_id="b3", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-21 09:00:00"),
+        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
+        Row(bet_id="b2", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-20 11:00:00")),
+        Row(bet_id="b3", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-21 09:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
@@ -98,9 +99,9 @@ def test_player_ltv_aggregates_across_all_dates(spark):
         Row(bet_id="b3", player_id="p2", market_id="m1", stake=5.0),
     ])
     settlement = _settlement(spark, [
-        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-20 10:00:00"),
-        Row(bet_id="b2", outcome="WON", payout_amount=40.0, settled_at_ts="2026-08-21 10:00:00"),
-        Row(bet_id="b3", outcome="LOST", payout_amount=0.0, settled_at_ts="2026-08-22 10:00:00"),
+        Row(bet_id="b1", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-20 10:00:00")),
+        Row(bet_id="b2", outcome="WON", payout_amount=40.0, settled_at_ts=_ts("2026-08-21 10:00:00")),
+        Row(bet_id="b3", outcome="LOST", payout_amount=0.0, settled_at_ts=_ts("2026-08-22 10:00:00")),
     ])
 
     settled = build_settled_bets(bet_placed, settlement)
